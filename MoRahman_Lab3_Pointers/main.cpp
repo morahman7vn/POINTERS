@@ -55,26 +55,27 @@ unsigned short int main()
 
 	do
 	{
-		cin >> numberOfContestants; cout << endl; //cin.ignore();
-		/*
-		do
-		{
-			cin >> numberOfContestants; cout << endl; cin.ignore();
-			if (cin.fail());
-			{
-				cout << "Must be an integer (number) value : ";
-				cin >> numberOfContestants; cout << endl;
-			}
-		}while(cin.fail())
-		*/
+		cin >> numberOfContestants;
 
-		while (numberOfContestants < 2)
+		while (!(cin >> numberOfContestants) || numberOfContestants < 2)
 		{
-			cout << "The number of contestants must be a positive number of at least two (2). \n";
-			cout << "How many contestants are there to be in the contest? ";
-			cin >> numberOfContestants; cout << endl;
-		}
+			
+			if (cin.fail())
+			{
+				cout << "\nMust be an integer (number) value : ";
+				cin.clear();
+				cin.ignore(42, '\n');
+			}
+			else if (numberOfContestants < 2)
+			{
+				cout << endl << "The number of contestants must be a positive number of at least two (2). \n";
+				cout << "How many contestants are there to be in the contest? ";
+			}
+			
+		} 
 		
+		cout << endl;
+
 		//Create a string pointer array
 		scoresPtr = new float[numberOfContestants]; namesPtr = new string[numberOfContestants];
 		
@@ -180,6 +181,7 @@ void display(short numberOfContestants, float averageOfScores, string *namesPtr,
 *[Revision One; No Functions, No Pointers]		10/25/16 -- 12:46  *
 *[Revision Two; with Functions, with Pointers]	10/27/16 -- 20:16  *
 * Logic Debug:									10/27/16 -- 20:22  *
+* Input Validation finalization:				11/27/16 -- 03:29  *
 ********************************************************************/
 
 //-------------------------------CODE-GRAVEYARD--------------------------------
